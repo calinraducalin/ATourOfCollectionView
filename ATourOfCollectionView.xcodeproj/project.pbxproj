@@ -19,6 +19,7 @@
 		7AED0D8F23365BF500FCAD0C /* ColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AED0D8E23365BF500FCAD0C /* ColumnFlowLayout.swift */; };
 		7AED0D9123365C1000FCAD0C /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AED0D9023365C1000FCAD0C /* Person.swift */; };
 		7AED0D9323366BBA00FCAD0C /* MosaicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AED0D9223366BBA00FCAD0C /* MosaicLayout.swift */; };
+		7AED0D9D233674D000FCAD0C /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AED0D9C233674D000FCAD0C /* ImageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		7AED0D8E23365BF500FCAD0C /* ColumnFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnFlowLayout.swift; sourceTree = "<group>"; };
 		7AED0D9023365C1000FCAD0C /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		7AED0D9223366BBA00FCAD0C /* MosaicLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicLayout.swift; sourceTree = "<group>"; };
+		7AED0D9C233674D000FCAD0C /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				7A9FBE7D233659F90013F993 /* FeedViewController.swift */,
 				7AED0D9223366BBA00FCAD0C /* MosaicLayout.swift */,
+				7AED0D9C233674D000FCAD0C /* ImageCell.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			files = (
 				7ADBBCC5233625DE009B02AE /* FriendsViewController.swift in Sources */,
 				7AED0D8F23365BF500FCAD0C /* ColumnFlowLayout.swift in Sources */,
+				7AED0D9D233674D000FCAD0C /* ImageCell.swift in Sources */,
 				7ADBBCC1233625DE009B02AE /* AppDelegate.swift in Sources */,
 				7A9FBE7E233659F90013F993 /* FeedViewController.swift in Sources */,
 				7AED0D9123365C1000FCAD0C /* Person.swift in Sources */,

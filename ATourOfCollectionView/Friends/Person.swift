@@ -12,4 +12,5 @@ struct Person {
     let name: String
     let image: UIImage?
     let lastUpdate: Date?
+    let feedImages: [UIImage]
 }

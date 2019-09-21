@@ -14,6 +14,10 @@ class FriendsViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(collectionView)
         navigationItem.leftBarButtonItem = leftBarButtonItem
+        
+        let feedViewController = FeedViewController(collectionViewLayout: MosaicLayout())
+        feedViewController.person = people.first
+        navigationController?.pushViewController(feedViewController, animated: false)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -34,25 +38,40 @@ class FriendsViewController: UIViewController {
     }()
     
     private lazy var leftBarButtonItem: UIBarButtonItem = {
+        let imageSize: CGFloat = 30
         let customButton = UIButton(type: .custom)
         customButton.layer.masksToBounds = true
-        customButton.layer.cornerRadius = 5
+        customButton.layer.cornerRadius = imageSize/2
         customButton.setImage(#imageLiteral(resourceName: "person5.jpg"), for: .normal)
         
         let barButtonItem = UIBarButtonItem(customView: customButton)
         
         barButtonItem.customView?.translatesAutoresizingMaskIntoConstraints = false
-        barButtonItem.customView?.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        barButtonItem.customView?.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        barButtonItem.customView?.heightAnchor.constraint(equalToConstant: imageSize).isActive = true
+        barButtonItem.customView?.widthAnchor.constraint(equalToConstant: imageSize).isActive = true
         
         return barButtonItem
     }()
     
+    static let allImages: [UIImage] = (1...15).compactMap { UIImage(named: "beach\($0)") }
+    
     private var people: [Person] = [
-        Person(name: "Steve", image: #imageLiteral(resourceName: "person1.jpg"), lastUpdate: Calendar.current.date(byAdding: .hour, value: -1, to: Date())),
-        Person(name: "Mohammed", image: #imageLiteral(resourceName: "person2.jpg"), lastUpdate: Calendar.current.date(byAdding: .day, value: -1, to: Date())),
-        Person(name: "Samir", image: #imageLiteral(resourceName: "person3.jpg"), lastUpdate: Calendar.current.date(byAdding: .month, value: -1, to: Date())),
-        Person(name: "Priyanka", image: #imageLiteral(resourceName: "person4.jpg"), lastUpdate: Calendar.current.date(byAdding: .year, value: -1, to: Date()))
+        Person(name: "Steve",
+               image: #imageLiteral(resourceName: "person1.jpg"),
+               lastUpdate: Calendar.current.date(byAdding: .hour, value: -1, to: Date()),
+               feedImages: allImages),
+        Person(name: "Mohammed",
+               image: #imageLiteral(resourceName: "person2.jpg"),
+               lastUpdate: Calendar.current.date(byAdding: .day, value: -1, to: Date()),
+               feedImages: Array(allImages.prefix(upTo: 14))),
+        Person(name: "Samir",
+               image: #imageLiteral(resourceName: "person3.jpg"),
+               lastUpdate: Calendar.current.date(byAdding: .month, value: -1, to: Date()),
+               feedImages: Array(allImages.prefix(upTo: 13))),
+        Person(name: "Priyanka",
+               image: #imageLiteral(resourceName: "person4.jpg"),
+               lastUpdate: Calendar.current.date(byAdding: .year, value: -1, to: Date()),
+               feedImages: Array(allImages.prefix(upTo: 12)))
     ]
 }
 
@@ -70,7 +89,7 @@ extension FriendsViewController: UICollectionViewDataSource {
 
 extension FriendsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let feedViewController = FeedViewController()
+        let feedViewController = FeedViewController(collectionViewLayout: MosaicLayout())
         feedViewController.person = people[indexPath.item]
         navigationController?.pushViewController(feedViewController, animated: true)
     }
