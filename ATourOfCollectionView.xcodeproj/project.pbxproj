@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A9FBE7E233659F90013F993 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9FBE7D233659F90013F993 /* FeedViewController.swift */; };
 		7ADBBCC1233625DE009B02AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADBBCC0233625DE009B02AE /* AppDelegate.swift */; };
 		7ADBBCC3233625DE009B02AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADBBCC2233625DE009B02AE /* SceneDelegate.swift */; };
 		7ADBBCC5233625DE009B02AE /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADBBCC4233625DE009B02AE /* FriendsViewController.swift */; };
 		7ADBBCC8233625DE009B02AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ADBBCC6233625DE009B02AE /* Main.storyboard */; };
 		7ADBBCCA233625DE009B02AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ADBBCC9233625DE009B02AE /* Assets.xcassets */; };
 		7ADBBCCD233625DE009B02AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ADBBCCB233625DE009B02AE /* LaunchScreen.storyboard */; };
+		7ADBBCD8233628F6009B02AE /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADBBCD6233628F6009B02AE /* PersonCell.swift */; };
+		7ADBBCD9233628F6009B02AE /* PersonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ADBBCD7233628F6009B02AE /* PersonCell.xib */; };
+		7AED0D8F23365BF500FCAD0C /* ColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AED0D8E23365BF500FCAD0C /* ColumnFlowLayout.swift */; };
+		7AED0D9123365C1000FCAD0C /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AED0D9023365C1000FCAD0C /* Person.swift */; };
+		7AED0D9323366BBA00FCAD0C /* MosaicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AED0D9223366BBA00FCAD0C /* MosaicLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A9FBE7D233659F90013F993 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		7ADBBCBD233625DE009B02AE /* ATourOfCollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ATourOfCollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ADBBCC0233625DE009B02AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ADBBCC2233625DE009B02AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +31,11 @@
 		7ADBBCC9233625DE009B02AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7ADBBCCC233625DE009B02AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7ADBBCCE233625DE009B02AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7ADBBCD6233628F6009B02AE /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
+		7ADBBCD7233628F6009B02AE /* PersonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonCell.xib; sourceTree = "<group>"; };
+		7AED0D8E23365BF500FCAD0C /* ColumnFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnFlowLayout.swift; sourceTree = "<group>"; };
+		7AED0D9023365C1000FCAD0C /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		7AED0D9223366BBA00FCAD0C /* MosaicLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A9FBE7F23365A1D0013F993 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				7A9FBE7D233659F90013F993 /* FeedViewController.swift */,
+				7AED0D9223366BBA00FCAD0C /* MosaicLayout.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
 		7ADBBCB4233625DD009B02AE = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +80,7 @@
 				7ADBBCC0233625DE009B02AE /* AppDelegate.swift */,
 				7ADBBCC2233625DE009B02AE /* SceneDelegate.swift */,
 				7ADBBCD4233627F6009B02AE /* Friends */,
+				7A9FBE7F23365A1D0013F993 /* Feed */,
 				7ADBBCC6233625DE009B02AE /* Main.storyboard */,
 				7ADBBCC9233625DE009B02AE /* Assets.xcassets */,
 				7ADBBCCB233625DE009B02AE /* LaunchScreen.storyboard */,
@@ -70,17 +92,13 @@
 		7ADBBCD4233627F6009B02AE /* Friends */ = {
 			isa = PBXGroup;
 			children = (
-				7ADBBCD52336280E009B02AE /* ViewController */,
+				7ADBBCC4233625DE009B02AE /* FriendsViewController.swift */,
+				7ADBBCD6233628F6009B02AE /* PersonCell.swift */,
+				7ADBBCD7233628F6009B02AE /* PersonCell.xib */,
+				7AED0D8E23365BF500FCAD0C /* ColumnFlowLayout.swift */,
+				7AED0D9023365C1000FCAD0C /* Person.swift */,
 			);
 			path = Friends;
-			sourceTree = "<group>";
-		};
-		7ADBBCD52336280E009B02AE /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				7ADBBCC4233625DE009B02AE /* FriendsViewController.swift */,
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +161,7 @@
 			files = (
 				7ADBBCCD233625DE009B02AE /* LaunchScreen.storyboard in Resources */,
 				7ADBBCCA233625DE009B02AE /* Assets.xcassets in Resources */,
+				7ADBBCD9233628F6009B02AE /* PersonCell.xib in Resources */,
 				7ADBBCC8233625DE009B02AE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,8 +174,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ADBBCC5233625DE009B02AE /* FriendsViewController.swift in Sources */,
+				7AED0D8F23365BF500FCAD0C /* ColumnFlowLayout.swift in Sources */,
 				7ADBBCC1233625DE009B02AE /* AppDelegate.swift in Sources */,
+				7A9FBE7E233659F90013F993 /* FeedViewController.swift in Sources */,
+				7AED0D9123365C1000FCAD0C /* Person.swift in Sources */,
+				7ADBBCD8233628F6009B02AE /* PersonCell.swift in Sources */,
 				7ADBBCC3233625DE009B02AE /* SceneDelegate.swift in Sources */,
+				7AED0D9323366BBA00FCAD0C /* MosaicLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
