@@ -43,69 +43,43 @@ class MosaicLayout: UICollectionViewLayout {
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        return cachedAttributes.filter { attributes -> Bool in
-            return rect.intersects(attributes.frame)
+        var attributesArray = [UICollectionViewLayoutAttributes]()
+        let firstMatchIndex = cachedAttributes.binarySearch { rect.intersects($0.frame) }
+        for attributes in cachedAttributes[..<firstMatchIndex].reversed() {
+            guard attributes.frame.maxY >= rect.minY else { break }
+            attributesArray.append(attributes)
         }
+        for attributes in cachedAttributes[firstMatchIndex...] {
+            guard attributes.frame.minY <= rect.maxY else { break }
+            attributesArray.append(attributes)
+        }
+        return attributesArray
     }
     
     //MARK: - Helper
     
-    private let imagesPerRow = [1, 2, 3]
-    
     private func createAttributes(for cv: UICollectionView) {
-        
+        let maxImagesPerRow = 3
+        let rowHeight: CGFloat = 250
         let contentWidth = cv.bounds.width
-        let isPortrait = cv.bounds.width < cv.bounds.height
-        let rowHeight: CGFloat = 150
         let itemsCount = cv.numberOfItems(inSection: 0)
-        var itemsCountOnCurrentRow = imagesPerRow.last!
+        
+        var itemsCountOnCurrentRow = maxImagesPerRow
         var rowIndex: CGFloat = 0
         var firstItemIndexOnCurrentRow = 0
         
         while firstItemIndexOnCurrentRow < itemsCount {
             let remainingItems = itemsCount - firstItemIndexOnCurrentRow
-            itemsCountOnCurrentRow = determineItemsCountOnCurrentRow(remainingItems: remainingItems, itemsCountOnPreviousRow: itemsCountOnCurrentRow, isPortrait: isPortrait)
+            itemsCountOnCurrentRow = determineItemsCountOnCurrentRow(remainingItems, itemsCountOnCurrentRow, maxImagesPerRow)
             print("row: \(rowIndex) - items: \(itemsCountOnCurrentRow)")
             for itemIndexOnCurrentRow in 0 ..< itemsCountOnCurrentRow {
-                let y: CGFloat
-                if itemIndexOnCurrentRow < 2 {
-                    y = rowHeight * rowIndex
-                } else {
-                    y = rowHeight * rowIndex + rowHeight / 2
-                }
-                
-                let x: CGFloat
-                if itemIndexOnCurrentRow == 0 {
-                    x = 0
-                } else if itemsCountOnCurrentRow == 2 {
-                    x = contentWidth / 2
-                } else {
-                    x = contentWidth * 2 / 3
-                }
-                
-                let width: CGFloat
-                if itemsCountOnCurrentRow == 1 {
-                    width = contentWidth
-                } else if itemsCountOnCurrentRow == 2 {
-                    width = contentWidth / 2
-                } else if itemIndexOnCurrentRow == 0 {
-                    width = contentWidth * 2 / 3
-                } else {
-                    width = contentWidth / 3
-                }
-                
-                let height: CGFloat
-                if itemsCountOnCurrentRow == 3, itemIndexOnCurrentRow > 0 {
-                    height = rowHeight / 2
-                } else {
-                    height = rowHeight
-                }
-                
                 let indexPath = IndexPath(item: firstItemIndexOnCurrentRow + itemIndexOnCurrentRow, section: 0)
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                let y = determinY(itemIndexOnCurrentRow, rowHeight, rowIndex)
+                let x = determinX(itemIndexOnCurrentRow, itemsCountOnCurrentRow, contentWidth)
+                let width = determineWidth(itemsCountOnCurrentRow, itemIndexOnCurrentRow, contentWidth)
+                let height = determineHeight(itemsCountOnCurrentRow, itemIndexOnCurrentRow, maxImagesPerRow, rowHeight)
                 attributes.frame = CGRect(x: x, y: y, width: width, height: height)
-                print("itemIndex: \(indexPath.item) - frame: \(attributes.frame)")
-                print(attributes)
                 cachedAttributes.append(attributes)
             }
             
@@ -119,12 +93,79 @@ class MosaicLayout: UICollectionViewLayout {
         }
     }
     
-    private func determineItemsCountOnCurrentRow(remainingItems: Int, itemsCountOnPreviousRow: Int, isPortrait: Bool) -> Int {
+    private func determineItemsCountOnCurrentRow(_ remainingItems: Int, _ itemsCountOnPreviousRow: Int, _ maxImagesPerRow: Int) -> Int {
         
         let itemsCountOnCurrentRow: Int
     
-        itemsCountOnCurrentRow = 1 + itemsCountOnPreviousRow % 3
+        if remainingItems < maxImagesPerRow {
+            itemsCountOnCurrentRow = remainingItems
+        } else {
+            itemsCountOnCurrentRow = 1 + itemsCountOnPreviousRow % maxImagesPerRow
+        }
         
         return itemsCountOnCurrentRow
+    }
+    
+    private func determinY(_ itemIndexOnCurrentRow: Int, _ rowHeight: CGFloat, _ rowIndex: CGFloat) -> CGFloat {
+        let y: CGFloat
+        if itemIndexOnCurrentRow < 2 {
+            y = rowHeight * rowIndex
+        } else {
+            y = rowHeight * rowIndex + rowHeight / 2
+        }
+        return y
+    }
+    
+    private func determinX(_ itemIndexOnCurrentRow: Int, _ itemsCountOnCurrentRow: Int, _ contentWidth: CGFloat) -> CGFloat {
+        let x: CGFloat
+        if itemIndexOnCurrentRow == 0 {
+            x = 0
+        } else if itemsCountOnCurrentRow == 2 {
+            x = contentWidth / 2
+        } else {
+            x = contentWidth * 2 / 3
+        }
+        return x
+    }
+    
+    private func determineWidth(_ itemsCountOnCurrentRow: Int, _ itemIndexOnCurrentRow: Int, _ contentWidth: CGFloat) -> CGFloat {
+        let width: CGFloat
+        if itemsCountOnCurrentRow == 1 {
+            width = contentWidth
+        } else if itemsCountOnCurrentRow == 2 {
+            width = contentWidth / 2
+        } else if itemIndexOnCurrentRow == 0 {
+            width = contentWidth * 2 / 3
+        } else {
+            width = contentWidth / 3
+        }
+        return width
+    }
+    
+    private func determineHeight(_ itemsCountOnCurrentRow: Int, _ itemIndexOnCurrentRow: Int, _ maxImagesPerRow: Int, _ rowHeight: CGFloat) -> CGFloat {
+        let height: CGFloat
+        if itemsCountOnCurrentRow == maxImagesPerRow, itemIndexOnCurrentRow > 0 {
+            height = rowHeight / 2
+        } else {
+            height = rowHeight
+        }
+        return height
+    }
+}
+
+extension Collection {
+
+    func binarySearch(predicate: (Iterator.Element) -> Bool) -> Index {
+        var low = startIndex
+        var high = endIndex
+        while low != high {
+            let mid = index(low, offsetBy: distance(from: low, to: high)/2)
+            if predicate(self[mid]) {
+                low = index(after: mid)
+            } else {
+                high = mid
+            }
+        }
+        return low
     }
 }

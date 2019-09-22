@@ -14,6 +14,7 @@ class FeedViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
         navigationItem.title = "\(person.name)'s Feed"
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
     }

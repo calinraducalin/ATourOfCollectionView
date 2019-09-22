@@ -16,19 +16,25 @@ class ImageCell: UICollectionViewCell {
     
     var image: UIImage? {
         didSet {
-            imageView.backgroundColor = UIColor.random()
-//            print(imageView.bounds)
+            imageView.image = image
         }
     }
     
     override init(frame: CGRect) {
-        imageView = UIImageView(frame: frame)
+        imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFill
-        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        imageView.clipsToBounds = true
         
         super.init(frame: frame)
         
         addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
     }
     
     required init?(coder: NSCoder) {
@@ -38,21 +44,5 @@ class ImageCell: UICollectionViewCell {
     
     override var reuseIdentifier: String? {
         return ImageCell.identifier
-    }
-}
-
-
-extension CGFloat {
-    static func random() -> CGFloat {
-        return CGFloat(arc4random()) / CGFloat(UInt32.max)
-    }
-}
-
-extension UIColor {
-    static func random() -> UIColor {
-        return UIColor(red:   .random(),
-                       green: .random(),
-                       blue:  .random(),
-                       alpha: 1.0)
     }
 }

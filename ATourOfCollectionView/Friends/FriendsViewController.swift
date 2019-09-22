@@ -14,10 +14,6 @@ class FriendsViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(collectionView)
         navigationItem.leftBarButtonItem = leftBarButtonItem
-        
-        let feedViewController = FeedViewController(collectionViewLayout: MosaicLayout())
-        feedViewController.person = people.first
-        navigationController?.pushViewController(feedViewController, animated: false)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -81,8 +77,8 @@ extension FriendsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonCell.identifier, for: indexPath) as! PersonCell
-        cell.person = people[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonCell.identifier, for: indexPath)
+        (cell as? PersonCell)?.person = people[indexPath.item]
         return cell
     }
 }
